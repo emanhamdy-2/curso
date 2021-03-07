@@ -52,7 +52,9 @@ class Cajas extends Component
   // wire:loading
   // wire:target
   // wire:loading.delaying.300ms
+  // eman.hamdy01090925920@gmail.com
   // hghldvhgsud[A@
+  // emanhamdy-2
   // hghldvhgsud[A@1
   public function doAction($action)
   {
@@ -99,24 +101,28 @@ class Cajas extends Component
       $this->validate([
         'tipo'=>'not_in:eleger'
       ]);
-      dump('vvvvvvvvvvvvv');
 
     if($this->selected_id <= 0){
 
       $caja=Caj::create([
-        'tipo'=> $this->tipo,
+        'tipo'=> 'gasto',
         'user_id'=> Auth::user()->id,
         'monto'=>  $this->monto,
         'compct'=>  $this->compct,
       ]);
       if($this->compacte){
         $image=$this->compacte;
-        $filenm= time() . '.' . explode('/',explode(':',substr($image,0,strpos($image,';')))[1])[1];
-        $moved=\Image::make($image)->save('images'.$filenm);
+        // $filenm= explode('/',explode(':',substr($image,0,strpos($image,';')))[1])[1];
+
+        $filenm = time() . '.' . $image->extension();
+
+        $moved  = \Image::make($image)->save('images'.$filenm);
+
         if($moved){
-          $caja->compact=$filenm;
+          $caja->compacte=$filenm;
           $caja->save();
         }
+
       }
 
     }else{
@@ -140,7 +146,7 @@ class Cajas extends Component
 
     }
 
-    if($this->selected_d <=0 ){
+    if($this->selected_id <=0 ){
       $record=Tipo::create([
         'description' => $this->description,
       ]);

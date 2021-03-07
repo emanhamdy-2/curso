@@ -57,7 +57,7 @@
               <th scope="row">{{ $caj->id }}</th>
               <td>{{ \Str::limit($caj->compct,50) }}</td>
               <td>
-                <img src='{{$caj->compacte}}'>
+                <img src='images/{{$caj->compacte}}'>
               <td>
               <td>{{ $caj->created_at->diffForHumans() }}</td>
               <td>
